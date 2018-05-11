@@ -1,0 +1,11 @@
+{
+    "autoload": {
+        "psr-4": {
+            "CFG\\": "src/CFG"
+        }
+    },
+    "require": {
+        "twig/twig": "^2.0",
+        "pimple/pimple": "~3.0"
+    }
+}
