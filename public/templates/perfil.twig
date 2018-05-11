@@ -1,0 +1,45 @@
+{% extends 'index.twig' %}
+
+{% block titulo %}
+    {{ template.objUsuario.nome }}
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <label for="nome">Nome Usuário:</label>&nbsp;{{ template.objUsuario.nome }}
+            </div>
+            <div class="row">
+                <label for="cep">CEP:</label>&nbsp;{{ template.objUsuario.cep }}
+            </div>
+            <div class="row">
+                <label for="rua">Rua:</label>&nbsp;{{ template.objUsuario.rua }}
+            </div>
+            <div class="row">
+                <label for="numero">Número:</label>&nbsp;{{ template.objUsuario.numero }}
+            </div>
+            <div class="row">
+                <label for="complemento">Complemento:</label>&nbsp;{{ template.objUsuario.complemento }}
+            </div>
+            <div class="row">
+                <label for="bairro">Bairro:</label>&nbsp;{{ template.objUsuario.bairro }}
+            </div>
+            <div class="row">
+                <label for="cidade">Cidade:</label>&nbsp;{{ template.objUsuario.cidade }}
+            </div>
+            <div class="row">
+                <label for="uf">Estado:</label>&nbsp;{{ template.objUsuario.uf }}
+            </div>
+            <div class="row">
+                <label for="telefones">Telefones:</label>&nbsp;{{ template.objUsuario.telefones }}
+            </div>
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+</div>
+{% endblock %}

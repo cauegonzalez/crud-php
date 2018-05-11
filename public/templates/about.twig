@@ -1,0 +1,67 @@
+{% extends 'index.twig' %}
+
+{% block titulo %}
+    {{ template.objUsuario.nome }}
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="card w-50">
+            <div class="card-body">
+                <h2 class="card-title">Cauê Gonzalez</h2>
+                <div class="row">
+                    <label for="cep">Graduação:</label>&nbsp;Ciência da Computação - UEM
+                </div>
+                <div class="row">
+                    <label for="rua">Pós-Graduação:</label>&nbsp;Especialização em Desenvolvimento Web - UEM
+                </div>
+                <div class="row">
+                    <label for="numero">Telefone:</label>&nbsp;(31) 99250-4077
+                </div>
+                <div class="row">
+                    <label for="complemento">E-mail:</label>&nbsp;cauegonzalez@gmail.com
+                </div>
+                <!-- <a href="#" class="btn btn-primary">Button</a> -->
+            </div>
+        </div>
+        <!-- <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="taz.jpg" alt="Card image cap">
+            <div class="card-body">
+                <div class="row">
+                <label for="nome">Nome Candidato:</label>&nbsp;Cauê Gonzalez
+            </div>
+            <div class="row">
+                <label for="cep">Graduação:</label>&nbsp;Ciência da Computação - UEM
+            </div>
+            <div class="row">
+                <label for="rua">Pós-Graduação:</label>&nbsp;Especialização em Desenvolvimento Web - UEM
+            </div>
+            <div class="row">
+                <label for="numero">Telefone:</label>&nbsp;(31) 99250-4077
+            </div>
+            <div class="row">
+                <label for="complemento">E-mail:</label>&nbsp;cauegonzalez@gmail.com
+            </div>
+            </div>
+        </div>
+        <div>
+            <div class="row">
+                <label for="nome">Nome Candidato:</label>&nbsp;Cauê Gonzalez
+            </div>
+            <div class="row">
+                <label for="cep">Graduação:</label>&nbsp;Ciência da Computação - UEM
+            </div>
+            <div class="row">
+                <label for="rua">Pós-Graduação:</label>&nbsp;Especialização em Desenvolvimento Web - UEM
+            </div>
+            <div class="row">
+                <label for="numero">Telefone:</label>&nbsp;(31) 99250-4077
+            </div>
+            <div class="row">
+                <label for="complemento">E-mail:</label>&nbsp;cauegonzalez@gmail.com
+            </div>
+        </div> -->
+    </div>
+</div>
+{% endblock %}
