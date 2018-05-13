@@ -14,6 +14,7 @@ class ServiceUsuario implements IServiceUsuario
     public function __construct(IConnection $connection, IUsuario $usuario)
     {
         $this->db = $connection->connect();
+        $this->db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         $this->usuario = $usuario;
     }
 
@@ -45,7 +46,10 @@ class ServiceUsuario implements IServiceUsuario
                        complemento,
                        bairro,
                        cidade,
-                       uf
+                       uf,
+                       (SELECT GROUP_CONCAT(t.telefone SEPARATOR '; ')
+                          FROM telefone t
+                         WHERE t.idusuario = usuario.id) as telefones
                   FROM usuario
                  WHERE id = :id";
         $stmt = $this->db->prepare($sql);
@@ -57,35 +61,42 @@ class ServiceUsuario implements IServiceUsuario
 
     public function save()
     {
-        $sql = "INSERT
-                  INTO usuario
-                       (nome,
-                        cep,
-                        rua,
-                        numero,
-                        complemento,
-                        bairro,
-                        cidade,
-                        uf)
-                VALUES (:nome,
-                        :cep,
-                        :rua,
-                        :numero,
-                        :complemento,
-                        :bairro,
-                        :cidade,
-                        :uf)";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':nome', $this->usuario->getNome());
-        $stmt->bindValue(':cep', $this->usuario->getCep());
-        $stmt->bindValue(':rua', $this->usuario->getRua());
-        $stmt->bindValue(':numero', $this->usuario->getNumero());
-        $stmt->bindValue(':complemento', $this->usuario->getComplemento());
-        $stmt->bindValue(':bairro', $this->usuario->getBairro());
-        $stmt->bindValue(':cidade', $this->usuario->getCidade());
-        $stmt->bindValue(':uf', $this->usuario->getUf());
+        try
+        {
+            $sql = "INSERT
+                      INTO usuario
+                           (nome,
+                            cep,
+                            rua,
+                            numero,
+                            complemento,
+                            bairro,
+                            cidade,
+                            uf)
+                    VALUES (:nome,
+                            :cep,
+                            :rua,
+                            :numero,
+                            :complemento,
+                            :bairro,
+                            :cidade,
+                            :uf)";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(':nome', $this->usuario->getNome());
+            $stmt->bindValue(':cep', $this->usuario->getCep());
+            $stmt->bindValue(':rua', $this->usuario->getRua());
+            $stmt->bindValue(':numero', $this->usuario->getNumero());
+            $stmt->bindValue(':complemento', $this->usuario->getComplemento());
+            $stmt->bindValue(':bairro', $this->usuario->getBairro());
+            $stmt->bindValue(':cidade', $this->usuario->getCidade());
+            $stmt->bindValue(':uf', $this->usuario->getUf());
 
-        $stmt->execute();
+            $stmt->execute();
+        }
+        catch (PDOException $e)
+        {
+            throw new Exception("Error Processing Request. ".$e->getMessage(), 1);
+        }
 
         return $this->db->lastInsertId();
     }
@@ -126,6 +137,14 @@ class ServiceUsuario implements IServiceUsuario
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':id', $id);
         $return = $stmt->execute();
+
+        $sql = "DELETE
+                  FROM telefone
+                 WHERE idusuario = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $return = $stmt->execute();
+        // $container['ServiceTelefones']->delete($id);
 
         return $return;
     }

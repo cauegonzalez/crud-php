@@ -22,4 +22,6 @@ interface IUsuario
     public function setCidade($cidade);
     public function getUf();
     public function setUf($uf);
+    public function getTelefones();
+    public function setTelefones($telefones);
 }

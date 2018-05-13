@@ -18,6 +18,7 @@ class Usuario implements IUsuario
     private $bairro;
     private $cidade;
     private $uf;
+    private $telefones;
 
     /**
      * @return mixed
@@ -195,6 +196,26 @@ class Usuario implements IUsuario
     public function setUf($uf)
     {
         $this->uf = $uf;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTelefones()
+    {
+        return $this->telefones;
+    }
+
+    /**
+     * @param mixed $telefones
+     *
+     * @return self
+     */
+    public function setTelefones($telefones)
+    {
+        $this->telefones = $telefones;
 
         return $this;
     }
